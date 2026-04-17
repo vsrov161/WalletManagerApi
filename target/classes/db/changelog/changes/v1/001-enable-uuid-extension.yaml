@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-enable-uuid-extension
+      author: Sergeev Victor
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: CREATE EXTENSION IF NOT EXISTS pgcrypto;

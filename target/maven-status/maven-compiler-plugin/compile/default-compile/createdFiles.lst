@@ -1,0 +1,10 @@
+com/vicsergeev/WalletManagerApi/controller/WebController.class
+com/vicsergeev/WalletManagerApi/repository/WalletRepository.class
+com/vicsergeev/WalletManagerApi/controller/WalletController.class
+com/vicsergeev/WalletManagerApi/exception/GlobalExceptionHandler.class
+com/vicsergeev/WalletManagerApi/dto/WalletDtoMapper.class
+com/vicsergeev/WalletManagerApi/service/WalletService.class
+com/vicsergeev/WalletManagerApi/dto/OperationType.class
+com/vicsergeev/WalletManagerApi/entity/Wallet.class
+com/vicsergeev/WalletManagerApi/WalletManagerApiApplication.class
+com/vicsergeev/WalletManagerApi/dto/WalletDto.class

@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-index
+      author: Sergeev Victor
+      labels: table-wallets
+      changes:
+        - createIndex:
+            tableName: wallets
+            indexName: idx_wallet_id
+            columns:
+              - column:
+                  name: id

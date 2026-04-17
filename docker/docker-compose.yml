@@ -1,7 +1,7 @@
 services:
   # Postgres
   postgres_db:
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     container_name: wallet-postgres
     environment:
       POSTGRES_DB: wallet_api_db
@@ -24,7 +24,7 @@ services:
     image: maven:3.9-eclipse-temurin-17
     container_name: wallet-app
     ports:
-      - "8080:8080"
+      - "8085:8085"
     volumes:
       - ../:/app
     working_dir: /app
@@ -32,6 +32,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/wallet_api_db
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin123
+    command: mvn spring-boot:run
     depends_on:
       postgres_db:
         condition: service_healthy
