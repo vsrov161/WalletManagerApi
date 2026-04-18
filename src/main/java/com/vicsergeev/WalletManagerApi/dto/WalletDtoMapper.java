@@ -21,7 +21,10 @@ public class WalletDtoMapper {
 
         Wallet wallet = new Wallet();
         wallet.setId(walletDto.getId());
-        wallet.setBalance(walletDto.getBalance());
+
+        if (walletDto.getBalance() != null) {
+            wallet.setBalance(walletDto.getBalance());
+        }
         return wallet;
     }
 }

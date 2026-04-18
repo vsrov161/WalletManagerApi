@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 16.04.2026
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/status")
 public class WebController {
     @GetMapping
     public String showHealthPage() {
-        return "health";
+        return "status";
     }
 }
