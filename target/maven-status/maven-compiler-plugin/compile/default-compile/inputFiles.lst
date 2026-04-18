@@ -6,9 +6,11 @@
 /app/src/main/java/com/vicsergeev/WalletManagerApi/dto/WalletCreateRequest.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/dto/WalletDto.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/dto/WalletDtoMapper.java
+/app/src/main/java/com/vicsergeev/WalletManagerApi/dto/WalletUpdateRequest.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/entity/Wallet.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/exception/CustomInsufficientFundsException.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/exception/CustomNotFoundException.java
+/app/src/main/java/com/vicsergeev/WalletManagerApi/exception/CustomValidateException.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/exception/GlobalExceptionHandler.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/repository/WalletRepository.java
 /app/src/main/java/com/vicsergeev/WalletManagerApi/service/WalletService.java

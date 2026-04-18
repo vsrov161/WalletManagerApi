@@ -25,4 +25,10 @@ public class GlobalExceptionHandler {
     public Map<String, String> handleCustomInsufficientFundsException(CustomInsufficientFundsException e) {
         return Map.of("Error", e.getMessage());
     }
+
+    @ExceptionHandler(CustomValidateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleCustomeValidateException(CustomValidateException e) {
+        return Map.of("Error", e.getMessage());
+    }
 }

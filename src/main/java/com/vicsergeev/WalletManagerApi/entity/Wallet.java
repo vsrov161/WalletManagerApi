@@ -5,7 +5,6 @@ package com.vicsergeev.WalletManagerApi.entity;
  * 16.04.2026
  */
 
-import com.vicsergeev.WalletManagerApi.dto.OperationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,9 +21,12 @@ import java.util.UUID;
 @Setter
 public class Wallet {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
     private Long balance;
+
+    @Column(nullable = false, length = 100)
+    private String walletTitle;
 }

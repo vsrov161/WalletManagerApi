@@ -18,4 +18,5 @@ import java.util.UUID;
 public class WalletDto {
     private UUID id;
     private Long balance;
+    private String walletTitle;
 }

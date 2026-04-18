@@ -8,6 +8,8 @@ package com.vicsergeev.WalletManagerApi.controller;
 import com.vicsergeev.WalletManagerApi.dto.OperationTypeRequest;
 import com.vicsergeev.WalletManagerApi.dto.WalletDto;
 import com.vicsergeev.WalletManagerApi.dto.WalletCreateRequest;
+import com.vicsergeev.WalletManagerApi.dto.WalletUpdateRequest;
+import com.vicsergeev.WalletManagerApi.exception.CustomValidateException;
 import com.vicsergeev.WalletManagerApi.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -73,15 +75,27 @@ public class WalletController {
         walletService.deleteAll();
     }
 
+    @PatchMapping("/wallets/{id}")
+    @Operation(summary = "Update wallet", description = "Use to update wallet title of specific wallet id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Response if updated performed successfully"),
+            @ApiResponse(responseCode = "400", description = "Response if provided invalid values"),
+            @ApiResponse(responseCode = "404", description = "Response if no such wallet id in DB")
+    })
+    public WalletDto updateWallet(@RequestBody @Valid WalletUpdateRequest request, @PathVariable UUID id) {
+        return walletService.updateById(id, request);
+    }
+
     // operations
     @PostMapping("/wallet")
-    @Operation(summary = "Operations with wallet", description = "Use WITHDRAW or DEPOSIT")
+    @Operation(summary = "Financial operations with wallet", description = "Use WITHDRAW or DEPOSIT to manage amount of balance")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "success - wallet created"),
-            @ApiResponse(responseCode = "404", description = "")
+            @ApiResponse(responseCode = "200", description = "Response if operation performed successfully"),
+            @ApiResponse(responseCode = "400", description = "Response if provided invalid values"),
+            @ApiResponse(responseCode = "404", description = "Response if no such wallet id in DB")
     })
     public Map<String, String> processWallet(@RequestBody @Valid OperationTypeRequest request) {
         walletService.process(request);
-        return Map.of("operation status", "success");
+        return Map.of("operation status", "success!");
     }
 }

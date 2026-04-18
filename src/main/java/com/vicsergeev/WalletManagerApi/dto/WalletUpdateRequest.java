@@ -1,7 +1,5 @@
 package com.vicsergeev.WalletManagerApi.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class WalletCreateRequest {
-    @NotNull
-    @Min(0)
-    private Long initialBalance;
-
-    @NotNull
-    private String walletTitle;
+public class WalletUpdateRequest {
+    private String updatedWalletTitle;
 }

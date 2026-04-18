@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 /*
  * Created by Vic
  * 17.04.2026
@@ -20,7 +18,7 @@ import java.util.UUID;
 @Setter
 public class OperationTypeRequest {
     @NotNull
-    private UUID walletId;
+    private String walletId;
 
     @NotNull
     private OperationType operationType;

@@ -11,8 +11,9 @@ public class WalletDtoMapper {
         if (wallet == null) return null;
 
         return new WalletDto(
-          wallet.getId(),
-          wallet.getBalance()
+                wallet.getId(),
+                wallet.getBalance(),
+                wallet.getWalletTitle()
         );
     }
 
@@ -25,6 +26,7 @@ public class WalletDtoMapper {
         if (walletDto.getBalance() != null) {
             wallet.setBalance(walletDto.getBalance());
         }
+        wallet.setWalletTitle(walletDto.getWalletTitle());
         return wallet;
     }
 }

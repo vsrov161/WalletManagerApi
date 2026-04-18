@@ -9,7 +9,9 @@ import com.vicsergeev.WalletManagerApi.dto.*;
 import com.vicsergeev.WalletManagerApi.entity.Wallet;
 import com.vicsergeev.WalletManagerApi.exception.CustomInsufficientFundsException;
 import com.vicsergeev.WalletManagerApi.exception.CustomNotFoundException;
+import com.vicsergeev.WalletManagerApi.exception.CustomValidateException;
 import com.vicsergeev.WalletManagerApi.repository.WalletRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,7 @@ public class WalletService {
     public WalletDto create(WalletCreateRequest walletCreateRequest) {
         Wallet wallet = new  Wallet();
         wallet.setBalance(walletCreateRequest.getInitialBalance());
+        wallet.setWalletTitle(walletCreateRequest.getWalletTitle());
         Wallet saved =  walletRepository.save(wallet);
         return WalletDtoMapper.mapToDto(saved);
     }
@@ -59,19 +62,46 @@ public class WalletService {
         walletRepository.deleteAll();
     }
 
+    @Transactional
+    public WalletDto updateById(UUID id, WalletUpdateRequest request) {
+        Wallet wallet = walletRepository.findById(id)
+                .orElseThrow(() -> new CustomNotFoundException(
+                        "Wallet with id: " + id + " not found"
+                ));
+        if (request.getUpdatedWalletTitle() == null) {
+            throw new CustomValidateException("wallet title can not be null");
+        }
+        wallet.setWalletTitle(request.getUpdatedWalletTitle());
+        walletRepository.save(wallet);
+        return WalletDtoMapper.mapToDto(wallet);
+    }
+
     // Operations logic
     @Transactional
     public void process(OperationTypeRequest request) {
-        Wallet wallet = walletRepository.findByIdForUpdate(request.getWalletId())
+
+        UUID walletUUID;
+        try {
+            walletUUID = UUID.fromString(request.getWalletId());
+        }  catch (IllegalArgumentException e) {
+            throw new CustomValidateException("invalid UUID format: "  + request.getWalletId());
+        }
+
+        Wallet wallet = walletRepository.findByIdForUpdate(walletUUID)
                 .orElseThrow(() -> new CustomNotFoundException("Wallet with id: " + request.getWalletId() + " not found"));
 
+        Long amount = request.getAmount();
+        if (amount == null) {
+            throw new CustomValidateException("amount can not be null");
+        }
+
         if (request.getOperationType() == OperationType.WITHDRAW) {
-            if (wallet.getBalance() < request.getAmount()) {
-                throw new CustomInsufficientFundsException("sorry, insufficient funds");
+            if (wallet.getBalance() < amount) {
+                throw new CustomInsufficientFundsException("insufficient funds");
             }
-            wallet.setBalance(wallet.getBalance() - request.getAmount());
+            wallet.setBalance(wallet.getBalance() - amount);
         } else {
-            wallet.setBalance(wallet.getBalance() + request.getAmount());
+            wallet.setBalance(wallet.getBalance() + amount);
         }
     }
 }

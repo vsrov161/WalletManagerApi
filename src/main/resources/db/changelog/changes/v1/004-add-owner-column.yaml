@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-wallet-title
+      author: Sergeev Victor
+      labels: table-wallets
+      changes:
+        - addColumn:
+            tableName: wallets
+            columns:
+              - column:
+                  name: wallet_title
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                  defaultValue: "unknown owner"
