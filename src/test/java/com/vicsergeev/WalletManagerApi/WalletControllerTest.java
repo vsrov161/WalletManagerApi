@@ -151,4 +151,18 @@ public class WalletControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.operation_status").value("success!"));
     }
+
+    @Test
+    void walletOperationWithdraw()  throws Exception {
+        OperationTypeRequest operationTypeRequest = new OperationTypeRequest();
+        operationTypeRequest.setWalletId(UUID.randomUUID().toString());
+        operationTypeRequest.setOperationType(OperationType.WITHDRAW);
+        operationTypeRequest.setAmount(1L);
+
+        mockMvc.perform(post("/api/v1/wallet")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(operationTypeRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.operation_status").value("success!"));
+    }
 }
