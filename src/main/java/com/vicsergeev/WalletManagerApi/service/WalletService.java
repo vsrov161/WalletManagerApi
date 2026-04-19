@@ -11,7 +11,6 @@ import com.vicsergeev.WalletManagerApi.exception.CustomInsufficientFundsExceptio
 import com.vicsergeev.WalletManagerApi.exception.CustomNotFoundException;
 import com.vicsergeev.WalletManagerApi.exception.CustomValidateException;
 import com.vicsergeev.WalletManagerApi.repository.WalletRepository;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
