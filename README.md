@@ -1,6 +1,11 @@
 # WalletManagerApi
 test task
 
+### Launch instructions
+1. `mvn clean package`
+2. `cd docker`
+3. `docker-compose up --build`
+
 ### Tech specs
 - Java 17
 - Spring Boot 3.5.13
