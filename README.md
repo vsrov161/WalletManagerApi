@@ -15,6 +15,7 @@ test task
 - http://localhost:8085/swagger-ui/index.html
 
 ### Todos - wiil be done in future
+- improve start up the application with jar
 - improve service logic
 - use BigDecimal
 - improve Swagger UI descriptions
