@@ -61,7 +61,7 @@ public class WalletService {
         walletRepository.deleteAll();
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public WalletDto updateById(UUID id, WalletUpdateRequest request) {
         Wallet wallet = walletRepository.findById(id)
                 .orElseThrow(() -> new CustomNotFoundException(
@@ -76,7 +76,7 @@ public class WalletService {
     }
 
     // Operations logic
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void process(OperationTypeRequest request) {
 
         UUID walletUUID;
